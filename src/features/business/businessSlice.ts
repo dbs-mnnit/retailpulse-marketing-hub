@@ -6,7 +6,7 @@ interface BusinessState {
 }
 
 const initialState: BusinessState = {
-  currentId: 'biz_demo_001',
+  currentId: localStorage.getItem('currentBusinessId') || 'biz_demo_001',
   businesses: [
     { id: 'biz_demo_001', name: 'Acme Retail Co.' },
   ],
@@ -18,6 +18,7 @@ const businessSlice = createSlice({
   reducers: {
     setCurrentBusiness: (state, action: PayloadAction<string>) => {
       state.currentId = action.payload;
+      localStorage.setItem('currentBusinessId', action.payload);
     },
     addBusiness: (state, action: PayloadAction<{ id: string; name: string }>) => {
       state.businesses.push(action.payload);

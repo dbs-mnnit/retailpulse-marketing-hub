@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import tailwindAnimate from "tailwindcss-animate";
 
 export default {
   darkMode: ["class"],
@@ -14,7 +15,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
         display: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
       },
       colors: {
@@ -55,21 +56,17 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
-        },
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        "2xl": "var(--radius)",
+        xl: "calc(var(--radius) - 4px)",
+        lg: "calc(var(--radius) - 8px)",
+        md: "calc(var(--radius) - 12px)",
+        sm: "calc(var(--radius) - 16px)",
+      },
+      boxShadow: {
+        premium: "var(--shadow-premium)",
+        glow: "var(--glow-primary)",
       },
       keyframes: {
         "accordion-down": {
@@ -97,13 +94,17 @@ export default {
           "100%": { transform: "translateX(0)" },
         },
         "pulse-glow": {
-          "0%, 100%": { boxShadow: "0 0 20px hsl(221.2 83.2% 53.3% / 0.3)" },
-          "50%": { boxShadow: "0 0 40px hsl(221.2 83.2% 53.3% / 0.6)" },
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.5" },
         },
         float: {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" },
         },
+        reveal: {
+          "0%": { opacity: "0", filter: "blur(10px)", transform: "translateY(20px)" },
+          "100%": { opacity: "1", filter: "blur(0)", transform: "translateY(0)" },
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -114,8 +115,9 @@ export default {
         "slide-in-right": "slide-in-right 0.3s ease-out",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
         float: "float 3s ease-in-out infinite",
+        reveal: "reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards",
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindAnimate],
 } satisfies Config;
